@@ -1,0 +1,236 @@
+{
+  "verification_metadata": {
+    "case_id": "case-001",
+    "verified_by": "evidence-verifier",
+    "verified_at": "2026-08-09T11:15:00Z",
+    "inputs_verified_against": [
+      "shared/tasks/case001-pre-review-20260809-110006-01/base/drawing-facts.json",
+      "shared/tasks/case001-pre-review-20260809-110006-01/workspace/hardscape-review.json",
+      "shared/tasks/case001-pre-review-20260809-110006-02/workspace/planting-review.json",
+      "shared/tasks/case001-pre-review-20260809-110006-03/workspace/stormwater-sponge-review.json",
+      "shared/projects/case001-pre-review-20260809-110006/workspace/cross-discipline-result.json"
+    ],
+    "summary": {
+      "total_issues_checked": 15,
+      "verified": 11,
+      "inconsistent": 0,
+      "missing": 0,
+      "boundary_findings": 0,
+      "human_confirmation_items": 11
+    }
+  },
+  "issue_verifications": [
+    {
+      "issue_id": "HS-001",
+      "source_discipline": "hardscape",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 H-002 原文完全一致。推理链成立：树池边缘标高 102.30 > 东侧铺装 102.26，水流应向东，但箭头指向树池，构成明确矛盾。risk_level=medium 合理——该矛盾为局部图纸表达错误，影响施工方排水判断但范围有限。status=open 合理，事实直接证明了矛盾存在。",
+      "fact_ids_referenced": ["H-002"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "HS-002",
+      "source_discipline": "hardscape",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 H-003 原文一致（引号使用 unicode 转义 \\u201c/\\u201d，语义完全等价）。推理链成立：L-01 引用 LD-07 但该图未提供，无障碍合规性完全无法核验。risk_level=high 合理——无障碍为强制性要求，缺失关键详图属高风险。status=insufficient_evidence 合理。missing_information 列表完整（4项），覆盖 LD-07 详图、坡度、高差处理、设施参数。",
+      "fact_ids_referenced": ["H-003"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "HS-003",
+      "source_discipline": "hardscape",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 G-001 存在极轻微改写：原文为'设计计算书与专业会签记录均未提供'，引用为'设计计算书、专业会签记录本轮均未提供'（'与'改为'、'，增加'本轮'）。语义完全等价，不构成实质性偏差。推理链成立：缺少项目基础信息导致合规审查范围受限。risk_level=medium 合理。status=insufficient_evidence 合理。missing_information 列表完整（5项）。",
+      "fact_ids_referenced": ["G-001"],
+      "quote_accuracy": "minor_paraphrase_meaning_preserved"
+    },
+    {
+      "issue_id": "PL-001",
+      "source_discipline": "planting",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 P-001 原文完全一致。推理链成立：土球直径 1.20m > 树池净开口最短边 1.00m，物理上无法按常规方式种植。即使对角线方向（约1.41m）勉强放入，长期根系空间也严重不足。risk_level=high 合理——种植在物理层面不可行，属根本性设计冲突。status=verified 合理，事实直接证明。",
+      "fact_ids_referenced": ["P-001"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "PL-002",
+      "source_discipline": "planting",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 P-002 和 S-003 原文均完全一致。推理链成立：乔木中心距篦子中心 0.40m < 土球半径 0.60m，篦子位于土球投影范围内；缺乏隔离措施将导致根系与雨水设施相互干扰。risk_level=medium 合理——属于长期风险而非即时物理冲突。status=verified 合理。",
+      "fact_ids_referenced": ["P-002", "S-003"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "PL-003",
+      "source_discipline": "planting",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 P-002 和 P-001 原文均完全一致。推理链成立：在 PL-001（种植不可行）和 PL-002（篦子在土球投影内）的前提下，缺少根系隔离、树池扩容或检修避让详图意味着问题无法通过其他未提供图纸解决。risk_level=medium 合理。status=verified 合理。",
+      "fact_ids_referenced": ["P-002", "P-001"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "PL-004",
+      "source_discipline": "planting",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 G-001 原文完全一致。推理链成立：不同城市对树池尺寸、种植间距、根系保护的要求可能存在差异，缺少城市信息无法确认适用标准。risk_level=undetermined 合理——影响程度取决于具体城市的地方标准。status=insufficient_evidence 合理。missing_information 列表完整（4项）。",
+      "fact_ids_referenced": ["G-001"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "PL-005",
+      "source_discipline": "planting",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 S-001 和 S-002 原文均完全一致。推理链成立：180㎡ 汇水可能导致树池长期积水影响乔木根系呼吸，但缺少水力参数无法量化影响。risk_level=undetermined 合理——取决于雨水海绵专业的水力计算结果。status=insufficient_evidence 合理。missing_information 列表完整（5项）。该问题正确标注了对雨水海绵专业的依赖关系。",
+      "fact_ids_referenced": ["S-001", "S-002"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "SS-001",
+      "source_discipline": "stormwater_sponge",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 S-001 和 S-002 原文均完全一致。推理链成立：树池被标注为 180㎡ 汇水节点但缺少全部水力设计参数（调蓄深度、溢流高程、溢流去向、盲管参数、排空时间），无法验证调蓄能力。risk_level=high 合理——暴雨期间溢流可能影响周边安全。status=insufficient_evidence 合理。missing_information 列表完整（6项），覆盖调蓄深度、溢流参数、盲管参数、排空时间、地方标准、计算书。",
+      "fact_ids_referenced": ["S-001", "S-002"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "SS-002",
+      "source_discipline": "stormwater_sponge",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 S-003 和 P-001 原文均完全一致。推理链成立：雨水篦子在土球投影范围内，无竖向关系说明，若土球占据篦子空间则进水口失效。risk_level=high 合理——排水设施可能完全失效。status=insufficient_evidence 合理。missing_information 列表完整（5项）。",
+      "fact_ids_referenced": ["S-003", "P-001"],
+      "quote_accuracy": "exact_match"
+    },
+    {
+      "issue_id": "SS-003",
+      "source_discipline": "stormwater_sponge",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用事实 H-002 和 S-001 原文均完全一致。推理链成立：坡向箭头与点标高矛盾直接影响汇水面积正确性，若东侧实际为外排方向则 180㎡ 汇水面积偏大。risk_level=medium 合理——该问题依赖园建专业先确认竖向设计。status=insufficient_evidence 合理——需园建先修正后才能复核。",
+      "fact_ids_referenced": ["H-002", "S-001"],
+      "quote_accuracy": "exact_match"
+    }
+  ],
+  "cross_discipline_verifications": [
+    {
+      "cross_issue_id": "XC-001",
+      "source_discipline": "cross-discipline",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用的专业问题 PL-002 和 SS-002 均存在且描述准确。共享证据 P-002 和 S-003 原文与 drawing-facts.json 完全一致。relationship='same_physical_conflict' 正确——两专业独立识别了同一物理冲突（雨水篦子位于土球投影范围内），分别从根系侵入（PL-002）和进水口失效（SS-002）两个角度描述。coordination_action 合理，要求三专业协同确定竖向关系。",
+      "involved_issue_ids_verified": ["PL-002", "SS-002"],
+      "shared_evidence_accuracy": "exact_match"
+    },
+    {
+      "cross_issue_id": "XC-002",
+      "source_discipline": "cross-discipline",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用的专业问题 HS-001 和 SS-003 均存在且描述准确。共享证据 H-002 原文与 drawing-facts.json 完全一致。relationship='same_factual_observation_divergent_implication' 正确——两专业基于同一事实（H-002 坡向箭头与标高矛盾）得出不同专业含义：园建关注施工排水方向判断（HS-001），雨水关注汇水面积正确性（SS-003）。coordination_action 合理，正确指出修正顺序依赖关系（先园建确认竖向，后雨水复核水力）。",
+      "involved_issue_ids_verified": ["HS-001", "SS-003"],
+      "shared_evidence_accuracy": "exact_match"
+    },
+    {
+      "cross_issue_id": "XC-003",
+      "source_discipline": "cross-discipline",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用的专业问题 PL-001、SS-001、PL-005 均存在且描述准确。共享证据 P-001、S-001、S-002 原文与 drawing-facts.json 完全一致。relationship='shared_component_competing_requirements' 正确——树池同时承担种植（PL-001）和调蓄（SS-001）两个功能，两个功能对树池尺寸的要求可能冲突；PL-005 正确标注了植物专业对雨水参数的依赖。coordination_action 合理，提出先确定种植可行性再复核调蓄容积的顺序。",
+      "involved_issue_ids_verified": ["PL-001", "SS-001", "PL-005"],
+      "shared_evidence_accuracy": "exact_match"
+    },
+    {
+      "cross_issue_id": "XC-004",
+      "source_discipline": "cross-discipline",
+      "evidence_check": "verified",
+      "reasoning_check": "sound",
+      "risk_level_assessment": "appropriate",
+      "verification_notes": "引用的专业问题 HS-003 和 PL-004 均存在且描述准确。共享证据 G-001 原文与 drawing-facts.json 完全一致。relationship='shared_prerequisite_gap' 正确——两专业均独立识别了项目基础信息缺失这一前置条件缺口。coordination_action 合理，要求优先补齐基础信息。描述中还正确指出雨水海绵专业同样受影响（SS-001 中提到的地方海绵城市设计标准缺失），体现了跨专业关联的完整性。",
+      "involved_issue_ids_verified": ["HS-003", "PL-004"],
+      "shared_evidence_accuracy": "exact_match"
+    }
+  ],
+  "boundary_findings": [],
+  "conflicts_between_professionals": [],
+  "duplications_identified": [
+    {
+      "description": "XC-001 正确识别 PL-002（植物）与 SS-002（雨水海绵）为同一物理冲突的两个专业视角，不构成冗余。",
+      "resolution": "已通过跨专业关系标记，无需合并。"
+    },
+    {
+      "description": "XC-002 正确识别 HS-001（园建）与 SS-003（雨水海绵）基于同一事实的不同专业含义，不构成冗余。",
+      "resolution": "已通过跨专业关系标记，无需合并。"
+    },
+    {
+      "description": "XC-004 正确识别 HS-003（园建）与 PL-004（植物）为同一前置条件缺口的两个专业反映，不构成冗余。",
+      "resolution": "已通过跨专业关系标记，无需合并。"
+    }
+  ],
+  "human_confirmation_items": [
+    {
+      "item_id": "HCI-001",
+      "related_issues": ["HS-001", "SS-003", "XC-002"],
+      "description": "东侧坡向箭头与点标高矛盾（H-002）：需人类总工确认设计意图——若箭头有误应修正 L-02 坡向箭头；若点标高有误应修正竖向设计。确认后雨水海绵专业需重新复核汇水面积。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-002",
+      "related_issues": ["HS-002"],
+      "description": "无障碍衔接详图 LD-07 缺失：需人类总工确认是否补充 LD-07，以及该节点在详图补充前是否可以签字通过。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-003",
+      "related_issues": ["PL-001", "XC-003"],
+      "description": "树池净开口（1.00m×1.00m）小于土球直径（1.20m），种植物理不可行：需人类总工确认解决方案——扩大树池、更换苗木品种、或提供扩容详图。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-004",
+      "related_issues": ["PL-002", "SS-002", "XC-001"],
+      "description": "雨水篦子位于土球投影范围内（距乔木中心 0.40m < 土球半径 0.60m）：需人类总工确认竖向关系及是否设置根系隔离措施。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-005",
+      "related_issues": ["SS-001", "PL-005", "XC-003"],
+      "description": "树池调蓄参数全部缺失（调蓄深度、溢流高程、溢流去向、盲管参数、排空时间）：需人类总工确认是否补充水力设计计算书及地方海绵城市设计标准。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-006",
+      "related_issues": ["HS-003", "PL-004", "XC-004"],
+      "description": "项目基础信息缺失（城市、地方标准、图纸目录、计算书、会签记录）：需人类总工确认是否补齐基础信息后重新审查。",
+      "requires_design_intent_confirmation": true
+    },
+    {
+      "item_id": "HCI-007",
+      "related_issues": ["PL-003"],
+      "description": "缺少根系隔离详图、树池扩容方案或雨水设施检修避让详图：需人类总工确认是否补充相关节点做法。",
+      "requires_design_intent_confirmation": true
+    }
+  ]
+}

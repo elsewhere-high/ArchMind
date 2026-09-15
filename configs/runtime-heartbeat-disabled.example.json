@@ -1,0 +1,9 @@
+{
+  "agents": {
+    "defaults": {
+      "heartbeat": {
+        "enabled": false
+      }
+    }
+  }
+}

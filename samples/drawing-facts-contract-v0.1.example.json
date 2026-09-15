@@ -1,0 +1,215 @@
+{
+  "contractName": "archmind-drawing-facts",
+  "schemaVersion": "0.1.0",
+  "datasetId": "DFS-DEMO-20260810-0001",
+  "projectId": "PRJ-DEMO-001",
+  "generatedAt": "2026-08-10T09:30:00+08:00",
+  "producer": {
+    "type": "vision_model",
+    "name": "sanitized-vision-extractor",
+    "version": "demo-1.0"
+  },
+  "drawings": [
+    {
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03",
+      "title": "某景观节点平面图（脱敏）",
+      "discipline": "landscape",
+      "pageCount": 1,
+      "contentHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "activeDrawingVersions": [
+    {
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03"
+    }
+  ],
+  "evidences": [
+    {
+      "evidenceId": "EVD-DEMO-L01-V03-0001",
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03",
+      "sourceKind": "pdf_page",
+      "region": {
+        "pageNumber": 1,
+        "coordinateSystem": "normalized_page",
+        "bbox": {"x": 0.18, "y": 0.22, "width": 0.16, "height": 0.08},
+        "label": "北入口树池尺寸标注"
+      },
+      "observation": "树池净开口尺寸标注为 1.00 m。",
+      "contentHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "provenance": {
+        "sourceAssetId": "ASSET-DEMO-001",
+        "sourceKind": "pdf_page",
+        "extractionMethod": "vision_model",
+        "extractionRunId": "RUN-DEMO-20260810-001",
+        "extractor": {"type": "model", "name": "sanitized-vision-extractor", "version": "demo-1.0"},
+        "extractedAt": "2026-08-10T09:20:00+08:00",
+        "contentHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "audit": {
+        "createdAt": "2026-08-10T09:20:01+08:00",
+        "createdBy": {"actorType": "model", "actorId": "sanitized-vision-extractor"},
+        "revision": 1,
+        "changeReason": "initial extraction",
+        "history": []
+      }
+    },
+    {
+      "evidenceId": "EVD-DEMO-L01-V03-0002",
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03",
+      "sourceKind": "pdf_page",
+      "region": {
+        "pageNumber": 1,
+        "coordinateSystem": "normalized_page",
+        "bbox": {"x": 0.42, "y": 0.18, "width": 0.19, "height": 0.07},
+        "label": "苗木规格标注"
+      },
+      "observation": "苗木规格标注土球直径为 1.20 m。",
+      "contentHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "provenance": {
+        "sourceAssetId": "ASSET-DEMO-001",
+        "sourceKind": "pdf_page",
+        "extractionMethod": "vision_model",
+        "extractionRunId": "RUN-DEMO-20260810-001",
+        "extractor": {"type": "model", "name": "sanitized-vision-extractor", "version": "demo-1.0"},
+        "extractedAt": "2026-08-10T09:20:00+08:00",
+        "contentHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "audit": {
+        "createdAt": "2026-08-10T09:20:02+08:00",
+        "createdBy": {"actorType": "model", "actorId": "sanitized-vision-extractor"},
+        "revision": 1,
+        "changeReason": "initial extraction",
+        "history": []
+      }
+    }
+  ],
+  "facts": [
+    {
+      "factId": "FACT-DEMO-0001",
+      "evidenceIds": ["EVD-DEMO-L01-V03-0001"],
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03",
+      "discipline": "hardscape",
+      "factType": "dimension",
+      "subject": "北入口树池净开口",
+      "predicate": "has_clear_width",
+      "value": 1.0,
+      "unit": "m",
+      "region": {
+        "pageNumber": 1,
+        "coordinateSystem": "normalized_page",
+        "bbox": {"x": 0.18, "y": 0.22, "width": 0.16, "height": 0.08},
+        "label": "北入口树池尺寸标注"
+      },
+      "confidence": 0.96,
+      "approvalStatus": "approved",
+      "provenance": {
+        "sourceAssetId": "ASSET-DEMO-001",
+        "sourceKind": "pdf_page",
+        "extractionMethod": "vision_model",
+        "extractionRunId": "RUN-DEMO-20260810-001",
+        "extractor": {"type": "model", "name": "sanitized-vision-extractor", "version": "demo-1.0"},
+        "extractedAt": "2026-08-10T09:20:00+08:00",
+        "contentHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "audit": {
+        "createdAt": "2026-08-10T09:20:05+08:00",
+        "createdBy": {"actorType": "model", "actorId": "sanitized-vision-extractor"},
+        "revision": 1,
+        "changeReason": "initial extraction and human approval",
+        "approval": {
+          "decision": "approved",
+          "reviewer": {"actorType": "human", "actorId": "reviewer-demo-01"},
+          "reviewedAt": "2026-08-10T09:28:00+08:00",
+          "comment": "标注清晰，与证据区域一致。"
+        },
+        "history": [
+          {
+            "fromStatus": "auto_extracted",
+            "toStatus": "pending_review",
+            "changedAt": "2026-08-10T09:25:00+08:00",
+            "changedBy": {"actorType": "system", "actorId": "human-review-gate"},
+            "reason": "queued for human review"
+          },
+          {
+            "fromStatus": "pending_review",
+            "toStatus": "approved",
+            "changedAt": "2026-08-10T09:28:00+08:00",
+            "changedBy": {"actorType": "human", "actorId": "reviewer-demo-01"},
+            "reason": "evidence confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "factId": "FACT-DEMO-0002",
+      "evidenceIds": ["EVD-DEMO-L01-V03-0002"],
+      "drawingId": "DRW-DEMO-L-01",
+      "drawingVersion": "V03",
+      "discipline": "planting",
+      "factType": "dimension",
+      "subject": "北入口乔木土球",
+      "predicate": "has_diameter",
+      "value": 1.2,
+      "unit": "m",
+      "region": {
+        "pageNumber": 1,
+        "coordinateSystem": "normalized_page",
+        "bbox": {"x": 0.42, "y": 0.18, "width": 0.19, "height": 0.07},
+        "label": "苗木规格标注"
+      },
+      "confidence": 0.94,
+      "approvalStatus": "approved",
+      "provenance": {
+        "sourceAssetId": "ASSET-DEMO-001",
+        "sourceKind": "pdf_page",
+        "extractionMethod": "vision_model",
+        "extractionRunId": "RUN-DEMO-20260810-001",
+        "extractor": {"type": "model", "name": "sanitized-vision-extractor", "version": "demo-1.0"},
+        "extractedAt": "2026-08-10T09:20:00+08:00",
+        "contentHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "audit": {
+        "createdAt": "2026-08-10T09:20:06+08:00",
+        "createdBy": {"actorType": "model", "actorId": "sanitized-vision-extractor"},
+        "revision": 1,
+        "changeReason": "initial extraction and human approval",
+        "approval": {
+          "decision": "approved",
+          "reviewer": {"actorType": "human", "actorId": "reviewer-demo-01"},
+          "reviewedAt": "2026-08-10T09:29:00+08:00",
+          "comment": "规格标注清晰，与证据区域一致。"
+        },
+        "history": [
+          {
+            "fromStatus": "auto_extracted",
+            "toStatus": "pending_review",
+            "changedAt": "2026-08-10T09:25:00+08:00",
+            "changedBy": {"actorType": "system", "actorId": "human-review-gate"},
+            "reason": "queued for human review"
+          },
+          {
+            "fromStatus": "pending_review",
+            "toStatus": "approved",
+            "changedAt": "2026-08-10T09:29:00+08:00",
+            "changedBy": {"actorType": "human", "actorId": "reviewer-demo-01"},
+            "reason": "evidence confirmed"
+          }
+        ]
+      }
+    }
+  ],
+  "conflicts": [],
+  "degradations": [],
+  "audit": {
+    "createdAt": "2026-08-10T09:30:00+08:00",
+    "createdBy": {"actorType": "system", "actorId": "drawing-facts-contract-adapter"},
+    "validatedAt": "2026-08-10T09:30:01+08:00",
+    "validator": "drawing-facts-v0.1.schema.json",
+    "validationStatus": "passed"
+  }
+}

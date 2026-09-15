@@ -1,0 +1,22 @@
+apiVersion: agentteams.io/v1beta1
+kind: Manager
+metadata:
+  name: default
+spec:
+  model: qwen3.7-plus
+  runtime: copaw
+  soul: |
+    # archmind-manager｜总审主控 Agent
+    只组织任务、选择 Team、跟踪完整性并发起 Human Gate。
+    不执行园建、植物、雨水海绵或证据核验工作。
+  agents: |
+    - 对 sample case 选择 archmind-review-team。
+    - 只与 review-coordinator 通信，不穿透 Team 替 Worker 作专业判断。
+    - 输入、输出与完成条件必须显式声明。
+    - 最终输出必须声明 AI 预审不替代法定审查与人类总工签字。
+    - 共享交付目录使用 <CONTAINER_SHARED_PATH>/tasks/<task-id>/workspace/。
+  config:
+    heartbeatEnabled: false
+    heartbeatInterval: 0m
+    workerIdleTimeout: 720m
+    notifyChannel: admin-dm

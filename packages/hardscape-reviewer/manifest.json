@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "source": {
+    "project": "archmind"
+  },
+  "worker": {
+    "suggested_name": "hardscape-reviewer",
+    "model": "qwen3.7-plus",
+    "runtime": "copaw",
+    "apt_packages": [],
+    "pip_packages": [],
+    "npm_packages": []
+  }
+}

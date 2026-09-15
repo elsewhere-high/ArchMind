@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archmind.local/schemas/skill-evidence-min-001/runtime-evidence-fragment.schema.json",
+  "title": "Raw Agent Runtime Skill Evidence Fragment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fragment_schema_version", "run_id", "task_id", "use_id", "agent_id", "skill_name", "runtime_session_id", "native_skill_probe", "load_event", "output_event", "extracted_from"],
+  "properties": {
+    "fragment_schema_version": {"const": "1.0.0"},
+    "run_id": {"const": "run-002-skill-evidence-min-001"},
+    "task_id": {"const": "task-20260902-skill-evidence-min-001"},
+    "use_id": {"type": "string", "pattern": "^USE-0[1-7]$"},
+    "agent_id": {"type": "string", "minLength": 1},
+    "skill_name": {"type": "string", "minLength": 1},
+    "runtime_session_id": {"type": "string", "minLength": 1},
+    "native_skill_probe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "checked_at", "evidence"],
+      "properties": {
+        "available": {"type": "boolean"},
+        "checked_at": {"type": "string", "format": "date-time"},
+        "evidence": {"type": "string", "minLength": 1}
+      }
+    },
+    "load_event": {"$ref": "#/$defs/toolEvent"},
+    "output_event": {"$ref": "#/$defs/toolEvent"},
+    "extracted_from": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "toolEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool_name", "tool_call_id", "tool_call_id_unavailable_reason", "started_at", "completed_at", "status", "arguments"],
+      "properties": {
+        "tool_name": {"enum": ["Skill", "read_file", "write_file"]},
+        "tool_call_id": {"type": ["string", "null"]},
+        "tool_call_id_unavailable_reason": {"type": ["string", "null"]},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": "string", "format": "date-time"},
+        "status": {"enum": ["success", "failed"]},
+        "arguments": {"type": "object"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"tool_call_id": {"type": "null"}}},
+          "then": {"properties": {"tool_call_id_unavailable_reason": {"type": "string", "minLength": 1}}},
+          "else": {"properties": {"tool_call_id_unavailable_reason": {"type": "null"}}}
+        }
+      ]
+    }
+  }
+}

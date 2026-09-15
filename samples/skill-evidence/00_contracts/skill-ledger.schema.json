@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archmind.local/schemas/skill-evidence-min-001/skill-ledger.schema.json",
+  "title": "Minimum Skill Evidence Aggregate Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ledger_schema_version", "run_id", "task_id", "generated_at", "expected_uses", "actual_uses", "unique_skills", "entries"],
+  "properties": {
+    "ledger_schema_version": {"const": "1.0.0"},
+    "run_id": {"const": "run-002-skill-evidence-min-001"},
+    "task_id": {"const": "task-20260902-skill-evidence-min-001"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "expected_uses": {"const": 7},
+    "actual_uses": {"type": "integer", "minimum": 0, "maximum": 7},
+    "unique_skills": {"type": "integer", "minimum": 0, "maximum": 5},
+    "entries": {
+      "type": "array",
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["trace_file", "trace_file_sha256", "trace"],
+        "properties": {
+          "trace_file": {"type": "string", "pattern": "^03_skill-traces/TRACE-SEMIN001-0[1-7]\\.json$"},
+          "trace_file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "trace": {"$ref": "skill-trace.schema.json"}
+        }
+      }
+    }
+  }
+}

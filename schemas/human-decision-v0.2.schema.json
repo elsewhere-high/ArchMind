@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archmind.local/schemas/human-decision-v0.2.schema.json",
+  "title": "ArchMind HumanDecision v0.2",
+  "type": "object",
+  "required": [
+    "run_id",
+    "task_id",
+    "human_item_id",
+    "decision",
+    "reason",
+    "operator",
+    "timestamp",
+    "previous_status",
+    "new_status",
+    "related_issue_ids",
+    "related_relation_ids",
+    "related_evidence_ids",
+    "source_room",
+    "message_event_id"
+  ],
+  "properties": {
+    "run_id": {"const": "run-002-human-gate"},
+    "task_id": {"type": "string", "minLength": 1},
+    "human_item_id": {
+      "type": "string",
+      "pattern": "^HCI-(?:[0-9]{3}|R2-(?:00[1-9]|01[0-2]))$"
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["ACCEPT", "REJECT", "REQUEST_MORE_EVIDENCE", "RERUN"]
+    },
+    "reason": {"type": "string", "minLength": 3},
+    "operator": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "previous_status": {"const": "pending_human"},
+    "new_status": {
+      "type": "string",
+      "enum": ["accepted", "rejected", "blocked_for_evidence", "rerun_required"]
+    },
+    "related_issue_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "related_relation_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "related_evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "source_room": {"type": "string", "minLength": 1},
+    "message_event_id": {
+      "description": "Matrix event ID when reliably available; otherwise null.",
+      "type": ["string", "null"]
+    },
+    "missing_information": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1
+    },
+    "rejection_reason": {"type": "string", "minLength": 3},
+    "rerun_target": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"decision": {"const": "ACCEPT"}}},
+      "then": {"properties": {"new_status": {"const": "accepted"}}}
+    },
+    {
+      "if": {"properties": {"decision": {"const": "REJECT"}}},
+      "then": {
+        "required": ["rejection_reason"],
+        "properties": {"new_status": {"const": "rejected"}}
+      }
+    },
+    {
+      "if": {"properties": {"decision": {"const": "REQUEST_MORE_EVIDENCE"}}},
+      "then": {
+        "required": ["missing_information"],
+        "properties": {"new_status": {"const": "blocked_for_evidence"}}
+      }
+    },
+    {
+      "if": {"properties": {"decision": {"const": "RERUN"}}},
+      "then": {
+        "required": ["rerun_target"],
+        "properties": {"new_status": {"const": "rerun_required"}}
+      }
+    }
+  ],
+  "additionalProperties": false
+}

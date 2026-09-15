@@ -1,0 +1,577 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:archmind:schema:drawing-facts:0.1.0",
+  "title": "ArchMind Drawing Facts Contract v0.1",
+  "description": "ArchMind的 Drawing Facts 独立交换契约；不包含 Issue 或 Cross-discipline Relation。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractName",
+    "schemaVersion",
+    "datasetId",
+    "projectId",
+    "generatedAt",
+    "producer",
+    "drawings",
+    "activeDrawingVersions",
+    "evidences",
+    "facts",
+    "conflicts",
+    "degradations",
+    "audit"
+  ],
+  "properties": {
+    "contractName": {"const": "archmind-drawing-facts"},
+    "schemaVersion": {"const": "0.1.0"},
+    "datasetId": {"$ref": "#/$defs/id"},
+    "projectId": {"$ref": "#/$defs/id"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "drawings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/drawingDescriptor"}
+    },
+    "activeDrawingVersions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/drawingRef"}
+    },
+    "evidences": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence"}
+    },
+    "facts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/drawingFact"}
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/factConflict"}
+    },
+    "degradations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/humanDegradation"}
+    },
+    "audit": {"$ref": "#/$defs/datasetAudit"},
+    "issues": false,
+    "crossDisciplineRelations": false
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "discipline": {
+      "type": "string",
+      "enum": [
+        "general",
+        "landscape",
+        "hardscape",
+        "vertical",
+        "planting",
+        "stormwater_sponge",
+        "process",
+        "architecture",
+        "structure",
+        "water_supply_drainage",
+        "electrical",
+        "hvac",
+        "other"
+      ]
+    },
+    "approvalStatus": {
+      "type": "string",
+      "enum": [
+        "auto_extracted",
+        "pending_review",
+        "approved",
+        "rejected",
+        "needs_clarification"
+      ]
+    },
+    "factType": {
+      "type": "string",
+      "enum": [
+        "dimension",
+        "elevation",
+        "slope",
+        "material",
+        "quantity",
+        "location",
+        "geometry",
+        "annotation",
+        "reference",
+        "clearance",
+        "accessibility",
+        "drainage",
+        "planting",
+        "equipment",
+        "presence",
+        "absence",
+        "text_note"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actorType", "actorId"],
+      "properties": {
+        "actorType": {
+          "type": "string",
+          "enum": ["human", "model", "system", "service", "importer"]
+        },
+        "actorId": {"$ref": "#/$defs/id"}
+      }
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "name", "version"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["vision_model", "ocr", "parser", "human", "importer", "contract_migration"]
+        },
+        "name": {"type": "string", "minLength": 1, "maxLength": 128},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64}
+      }
+    },
+    "drawingRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["drawingId", "drawingVersion"],
+      "properties": {
+        "drawingId": {"$ref": "#/$defs/id"},
+        "drawingVersion": {"type": "string", "minLength": 1, "maxLength": 64}
+      }
+    },
+    "drawingDescriptor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "drawingId",
+        "drawingVersion",
+        "title",
+        "discipline",
+        "pageCount",
+        "contentHash"
+      ],
+      "properties": {
+        "drawingId": {"$ref": "#/$defs/id"},
+        "drawingVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "title": {"type": "string", "minLength": 1, "maxLength": 256},
+        "discipline": {"$ref": "#/$defs/discipline"},
+        "pageCount": {"type": "integer", "minimum": 1},
+        "contentHash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "bbox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": {"type": "number", "minimum": 0, "maximum": 1},
+        "y": {"type": "number", "minimum": 0, "maximum": 1},
+        "width": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "height": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageNumber", "coordinateSystem", "bbox", "label"],
+      "properties": {
+        "pageNumber": {"type": "integer", "minimum": 1},
+        "coordinateSystem": {"const": "normalized_page"},
+        "bbox": {"$ref": "#/$defs/bbox"},
+        "label": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "extractor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "name", "version"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["model", "ocr", "parser", "human", "importer"]
+        },
+        "name": {"type": "string", "minLength": 1, "maxLength": 128},
+        "version": {"type": "string", "minLength": 1, "maxLength": 64}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceAssetId",
+        "sourceKind",
+        "extractionMethod",
+        "extractionRunId",
+        "extractor",
+        "extractedAt",
+        "contentHash"
+      ],
+      "properties": {
+        "sourceAssetId": {"$ref": "#/$defs/id"},
+        "sourceKind": {
+          "type": "string",
+          "enum": [
+            "drawing_image",
+            "pdf_page",
+            "cad_export",
+            "ocr_text",
+            "parser_output",
+            "human_annotation"
+          ]
+        },
+        "extractionMethod": {
+          "type": "string",
+          "enum": ["vision_model", "ocr", "parser", "human_entered", "imported"]
+        },
+        "extractionRunId": {"$ref": "#/$defs/id"},
+        "extractor": {"$ref": "#/$defs/extractor"},
+        "extractedAt": {"type": "string", "format": "date-time"},
+        "contentHash": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "historyEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromStatus", "toStatus", "changedAt", "changedBy", "reason"],
+      "properties": {
+        "fromStatus": {
+          "oneOf": [
+            {"$ref": "#/$defs/approvalStatus"},
+            {"type": "null"}
+          ]
+        },
+        "toStatus": {"$ref": "#/$defs/approvalStatus"},
+        "changedAt": {"type": "string", "format": "date-time"},
+        "changedBy": {"$ref": "#/$defs/actor"},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 512}
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "reviewer", "reviewedAt", "comment"],
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["approved", "rejected", "needs_clarification"]
+        },
+        "reviewer": {"$ref": "#/$defs/actor"},
+        "reviewedAt": {"type": "string", "format": "date-time"},
+        "comment": {"type": "string", "minLength": 1, "maxLength": 1024}
+      }
+    },
+    "basicAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "createdBy", "revision", "changeReason", "history"],
+      "properties": {
+        "createdAt": {"type": "string", "format": "date-time"},
+        "createdBy": {"$ref": "#/$defs/actor"},
+        "revision": {"type": "integer", "minimum": 1},
+        "changeReason": {"type": "string", "minLength": 1, "maxLength": 512},
+        "history": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/historyEntry"}
+        }
+      }
+    },
+    "factAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "createdBy", "revision", "changeReason", "approval", "history"],
+      "properties": {
+        "createdAt": {"type": "string", "format": "date-time"},
+        "createdBy": {"$ref": "#/$defs/actor"},
+        "revision": {"type": "integer", "minimum": 1},
+        "changeReason": {"type": "string", "minLength": 1, "maxLength": 512},
+        "approval": {
+          "oneOf": [
+            {"$ref": "#/$defs/approval"},
+            {"type": "null"}
+          ]
+        },
+        "history": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/historyEntry"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "drawingId",
+        "drawingVersion",
+        "sourceKind",
+        "region",
+        "observation",
+        "contentHash",
+        "provenance",
+        "audit"
+      ],
+      "properties": {
+        "evidenceId": {"$ref": "#/$defs/id"},
+        "drawingId": {"$ref": "#/$defs/id"},
+        "drawingVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "sourceKind": {
+          "type": "string",
+          "enum": [
+            "drawing_image",
+            "pdf_page",
+            "cad_export",
+            "ocr_text",
+            "parser_output",
+            "human_annotation"
+          ]
+        },
+        "region": {"$ref": "#/$defs/region"},
+        "observation": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "contentHash": {"$ref": "#/$defs/hash"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "audit": {"$ref": "#/$defs/basicAudit"}
+      }
+    },
+    "drawingFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factId",
+        "evidenceIds",
+        "drawingId",
+        "drawingVersion",
+        "discipline",
+        "factType",
+        "subject",
+        "predicate",
+        "value",
+        "unit",
+        "region",
+        "confidence",
+        "approvalStatus",
+        "provenance",
+        "audit"
+      ],
+      "properties": {
+        "factId": {"$ref": "#/$defs/id"},
+        "evidenceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "drawingId": {"$ref": "#/$defs/id"},
+        "drawingVersion": {"type": "string", "minLength": 1, "maxLength": 64},
+        "discipline": {"$ref": "#/$defs/discipline"},
+        "disciplineOther": {"type": "string", "minLength": 1, "maxLength": 128},
+        "factType": {"$ref": "#/$defs/factType"},
+        "subject": {"type": "string", "minLength": 1, "maxLength": 512},
+        "predicate": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value": {
+          "oneOf": [
+            {"type": "string", "minLength": 1, "maxLength": 2048},
+            {"type": "number"},
+            {"type": "boolean"}
+          ]
+        },
+        "unit": {
+          "oneOf": [
+            {"type": "string", "minLength": 1, "maxLength": 32},
+            {"type": "null"}
+          ]
+        },
+        "region": {"$ref": "#/$defs/region"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "approvalStatus": {"$ref": "#/$defs/approvalStatus"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "audit": {"$ref": "#/$defs/factAudit"},
+        "supersedesFactId": {"$ref": "#/$defs/id"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"discipline": {"const": "other"}}, "required": ["discipline"]},
+          "then": {"required": ["disciplineOther"]},
+          "else": {"not": {"required": ["disciplineOther"]}}
+        },
+        {
+          "if": {"properties": {"factType": {"const": "absence"}}, "required": ["factType"]},
+          "then": {"properties": {"approvalStatus": {"not": {"const": "auto_extracted"}}}}
+        },
+        {
+          "if": {
+            "properties": {
+              "approvalStatus": {"enum": ["auto_extracted", "pending_review"]}
+            },
+            "required": ["approvalStatus"]
+          },
+          "then": {
+            "properties": {
+              "audit": {"properties": {"approval": {"type": "null"}}}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"approvalStatus": {"const": "approved"}}, "required": ["approvalStatus"]},
+          "then": {
+            "properties": {
+              "audit": {
+                "properties": {
+                  "approval": {
+                    "type": "object",
+                    "properties": {"decision": {"const": "approved"}}
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"approvalStatus": {"const": "rejected"}}, "required": ["approvalStatus"]},
+          "then": {
+            "properties": {
+              "audit": {
+                "properties": {
+                  "approval": {
+                    "type": "object",
+                    "properties": {"decision": {"const": "rejected"}}
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"approvalStatus": {"const": "needs_clarification"}}, "required": ["approvalStatus"]},
+          "then": {
+            "properties": {
+              "audit": {
+                "properties": {
+                  "approval": {
+                    "type": "object",
+                    "properties": {"decision": {"const": "needs_clarification"}}
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "factConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflictId",
+        "factIds",
+        "conflictType",
+        "status",
+        "requiresHuman",
+        "message",
+        "resolutionNote",
+        "audit"
+      ],
+      "properties": {
+        "conflictId": {"$ref": "#/$defs/id"},
+        "factIds": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "conflictType": {
+          "type": "string",
+          "enum": [
+            "same_subject_predicate_different_value",
+            "drawing_version_conflict",
+            "region_overlap_inconsistency",
+            "duplicate",
+            "other"
+          ]
+        },
+        "status": {"type": "string", "enum": ["unresolved", "resolved", "dismissed"]},
+        "requiresHuman": {"const": true},
+        "message": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "resolutionNote": {
+          "oneOf": [
+            {"type": "string", "minLength": 1, "maxLength": 1024},
+            {"type": "null"}
+          ]
+        },
+        "audit": {"$ref": "#/$defs/basicAudit"}
+      }
+    },
+    "humanDegradation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "degradationId",
+        "reasonCode",
+        "severity",
+        "scope",
+        "relatedIds",
+        "message",
+        "requiredAction",
+        "status",
+        "audit"
+      ],
+      "properties": {
+        "degradationId": {"$ref": "#/$defs/id"},
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "schema_validation_failed",
+            "evidence_missing",
+            "drawing_version_conflict",
+            "conflicting_facts",
+            "unsupported_fact_type",
+            "low_confidence",
+            "ambiguous_region",
+            "other"
+          ]
+        },
+        "severity": {"type": "string", "enum": ["blocking", "warning"]},
+        "scope": {"type": "string", "enum": ["dataset", "drawing", "evidence", "fact"]},
+        "relatedIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/id"}
+        },
+        "drawingRef": {"$ref": "#/$defs/drawingRef"},
+        "message": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "requiredAction": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "status": {"type": "string", "enum": ["open", "resolved"]},
+        "audit": {"$ref": "#/$defs/basicAudit"}
+      }
+    },
+    "datasetAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "createdBy", "validatedAt", "validator", "validationStatus"],
+      "properties": {
+        "createdAt": {"type": "string", "format": "date-time"},
+        "createdBy": {"$ref": "#/$defs/actor"},
+        "validatedAt": {"type": "string", "format": "date-time"},
+        "validator": {"type": "string", "minLength": 1, "maxLength": 256},
+        "validationStatus": {"const": "passed"}
+      }
+    }
+  }
+}

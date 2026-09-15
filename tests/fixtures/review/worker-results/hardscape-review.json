@@ -1,0 +1,78 @@
+[
+  {
+    "issue_id": "HS-001",
+    "discipline": "hardscape",
+    "drawing_reference": ["L-02"],
+    "location": "北入口树池东侧人行铺装",
+    "issue_description": "东侧坡向箭头与点标高矛盾：树池边缘标高 102.30，东侧铺装点标高 102.26（低于树池边缘），但坡向箭头仍指向树池方向。按标高数据，水流方向应背离树池向东，与箭头方向相反。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "H-002",
+        "quoted_fact": "树池边缘标高 102.30，东侧铺装点标高 102.26；东侧坡向箭头仍指向树池，箭头与点标高表达方向不一致。"
+      }
+    ],
+    "rule_or_reason": "竖向设计中坡向箭头应与点标高变化方向一致，否则施工方无法判断排水方向，可能导致积水或倒坡。",
+    "risk_level": "medium",
+    "related_disciplines": ["stormwater_sponge"],
+    "recommendation": "核实东侧实际设计坡向：若设计意图为向东排水，应将坡向箭头修正为背离树池方向；若设计意图为向树池汇水，则东侧铺装点标高应高于树池边缘标高。修正后需同步检查汇水面积与雨水篦子容量是否匹配（关联雨水海绵专业）。",
+    "confidence": 0.92,
+    "requires_human_review": true,
+    "status": "open"
+  },
+  {
+    "issue_id": "HS-002",
+    "discipline": "hardscape",
+    "drawing_reference": ["L-01"],
+    "location": "北入口无障碍通道与树池交界",
+    "issue_description": "总平面标注无障碍衔接详见 LD-07，但本轮资料未提供 LD-07 详图，且 L-01 未标注该处高差处理方式（如坡道坡度、扶手、平台宽度等）。无障碍通道是否满足通行要求完全无法核验。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "H-003",
+        "quoted_fact": "总平标注\u201c无障碍衔接详见 LD-07\u201d，本轮资料未提供 LD-07，且 L-01 未标注该处高差处理。"
+      }
+    ],
+    "rule_or_reason": "无障碍设计属于强制性要求，施工图签字前必须提供完整的无障碍衔接详图，包括坡度、平台尺寸、扶手设置、地面防滑等关键参数。缺失详图意味着该节点无法通过合规审查。",
+    "risk_level": "high",
+    "related_disciplines": [],
+    "recommendation": "补充 LD-07 详图，明确无障碍通道的纵坡坡度（\u22641:12）、休息平台、扶手设置、地面材料及防滑处理、与树池边缘的安全距离等。在 LD-07 补充前，该节点不应签字通过。",
+    "confidence": 0.95,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "LD-07 入口无障碍衔接详图未提供",
+      "无障碍通道纵坡坡度未标注",
+      "无障碍通道与树池边缘的高差处理方式未标注",
+      "扶手、平台、防滑地面等无障碍设施参数未提供"
+    ]
+  },
+  {
+    "issue_id": "HS-003",
+    "discipline": "hardscape",
+    "drawing_reference": ["L-01", "L-02"],
+    "location": "北入口项目整体",
+    "issue_description": "项目具体城市、适用的地方标准、完整图纸目录、设计计算书与专业会签记录均未提供。在此条件下，无法确认竖向设计、坡度取值、铺装构造等是否满足当地规范要求，也无法确认图纸完整性。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "G-001",
+        "quoted_fact": "项目具体城市、适用地方标准、完整图纸目录、设计计算书、专业会签记录本轮均未提供。"
+      }
+    ],
+    "rule_or_reason": "施工图签字前预审需基于完整的图纸目录和地方适用标准进行。缺少基础信息将导致审查范围受限，无法对整体合规性做出判断。",
+    "risk_level": "medium",
+    "related_disciplines": ["planting", "stormwater_sponge"],
+    "recommendation": "补充项目所在城市及适用的地方标准清单、完整图纸目录、竖向设计计算书、专业会签记录。在基础信息补齐前，本轮审查结论仅基于已提供的结构化事实，不代表整体合规。",
+    "confidence": 0.85,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "项目具体城市未提供",
+      "适用的地方标准清单未提供",
+      "完整图纸目录未提供",
+      "设计计算书未提供",
+      "专业会签记录未提供"
+    ]
+  }
+]

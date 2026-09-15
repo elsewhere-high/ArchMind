@@ -1,0 +1,159 @@
+{
+  "contract_version": "skill-evidence-min-001-v1",
+  "run_id": "run-002-skill-evidence-min-001",
+  "task_id": "task-20260902-skill-evidence-min-001",
+  "team_project_id": "case001-skill-evidence-min-001",
+  "expected_use_count": 7,
+  "expected_unique_skills": [
+    "extract-review-context",
+    "professional-issue-format",
+    "cross-discipline-conflict-check",
+    "evidence-verification",
+    "review-summary"
+  ],
+  "allowed_agents": [
+    "review-coordinator",
+    "planting-reviewer",
+    "stormwater-sponge-reviewer",
+    "evidence-verifier"
+  ],
+  "forbidden_agent_runtime": "hardscape-reviewer",
+  "skill_uses": [
+    {
+      "use_id": "USE-01",
+      "trace_id": "TRACE-SEMIN001-01",
+      "agent_id": "planting-reviewer",
+      "skill_name": "extract-review-context",
+      "skill_version": "1.0.0",
+      "definition_sha256": "5941309d1f15e5e4bcc3997cca7a85fb36a9243e95f2d6572ecc9db98d2777c2",
+      "input_reference": "01_input/planting-extract-input.json",
+      "output_reference": "04_outputs/planting-review-context.json",
+      "downstream_consumer": "planting-reviewer:professional-issue-format",
+      "downstream_reference": "05_downstream/planting-professional-input.json",
+      "downstream_effect": "Extracted planting facts become the bounded input to professional issue formatting."
+    },
+    {
+      "use_id": "USE-02",
+      "trace_id": "TRACE-SEMIN001-02",
+      "agent_id": "planting-reviewer",
+      "skill_name": "professional-issue-format",
+      "skill_version": "1.0.0",
+      "definition_sha256": "6c9220e48a0a20e9ed12956de79034b638d3db2387050457a9252755b3a965a1",
+      "input_reference": "05_downstream/planting-professional-input.json",
+      "output_reference": "04_outputs/planting-review.json",
+      "downstream_consumer": "review-coordinator:cross-discipline-conflict-check",
+      "downstream_reference": "05_downstream/cross-discipline-input.json",
+      "downstream_effect": "Structured planting issues become one discipline input to the cross-discipline check."
+    },
+    {
+      "use_id": "USE-03",
+      "trace_id": "TRACE-SEMIN001-03",
+      "agent_id": "stormwater-sponge-reviewer",
+      "skill_name": "extract-review-context",
+      "skill_version": "1.0.0",
+      "definition_sha256": "5941309d1f15e5e4bcc3997cca7a85fb36a9243e95f2d6572ecc9db98d2777c2",
+      "input_reference": "01_input/stormwater-extract-input.json",
+      "output_reference": "04_outputs/stormwater-review-context.json",
+      "downstream_consumer": "stormwater-sponge-reviewer:professional-issue-format",
+      "downstream_reference": "05_downstream/stormwater-professional-input.json",
+      "downstream_effect": "Extracted stormwater facts become the bounded input to professional issue formatting."
+    },
+    {
+      "use_id": "USE-04",
+      "trace_id": "TRACE-SEMIN001-04",
+      "agent_id": "stormwater-sponge-reviewer",
+      "skill_name": "professional-issue-format",
+      "skill_version": "1.0.0",
+      "definition_sha256": "6c9220e48a0a20e9ed12956de79034b638d3db2387050457a9252755b3a965a1",
+      "input_reference": "05_downstream/stormwater-professional-input.json",
+      "output_reference": "04_outputs/stormwater-sponge-review.json",
+      "downstream_consumer": "review-coordinator:cross-discipline-conflict-check",
+      "downstream_reference": "05_downstream/cross-discipline-input.json",
+      "downstream_effect": "Structured stormwater issues become the second discipline input to the cross-discipline check."
+    },
+    {
+      "use_id": "USE-05",
+      "trace_id": "TRACE-SEMIN001-05",
+      "agent_id": "review-coordinator",
+      "skill_name": "cross-discipline-conflict-check",
+      "skill_version": "1.0.0",
+      "definition_sha256": "cf2db2d6c73a9cdb521f6c0322be07fc90a7d5f29cdba354e6bd7e5928c6574b",
+      "input_reference": "05_downstream/cross-discipline-input.json",
+      "output_reference": "04_outputs/cross-discipline-result.json",
+      "downstream_consumer": "evidence-verifier:evidence-verification",
+      "downstream_reference": "05_downstream/evidence-verification-input.json",
+      "downstream_effect": "Verified two-discipline relations become an explicit Evidence Verifier input."
+    },
+    {
+      "use_id": "USE-06",
+      "trace_id": "TRACE-SEMIN001-06",
+      "agent_id": "evidence-verifier",
+      "skill_name": "evidence-verification",
+      "skill_version": "1.0.0",
+      "definition_sha256": "e684554853b2b58c5f71d1ac9b9f6a2abfacbfe0a8421cd46dbddc1c78a51de1",
+      "input_reference": "05_downstream/evidence-verification-input.json",
+      "output_reference": "04_outputs/evidence-verification.json",
+      "downstream_consumer": "review-coordinator:review-summary",
+      "downstream_reference": "05_downstream/review-summary-input.json",
+      "downstream_effect": "Evidence findings become the required verified input to the evidence-only review summary."
+    },
+    {
+      "use_id": "USE-07",
+      "trace_id": "TRACE-SEMIN001-07",
+      "agent_id": "review-coordinator",
+      "skill_name": "review-summary",
+      "skill_version": "1.0.0",
+      "definition_sha256": "eaa856270ba1c32fb7a789736fa2e8770ed7e9cb4dbe6bbc407a9daeadb03a0a",
+      "input_reference": "05_downstream/review-summary-input.json",
+      "output_reference": "04_outputs/team-summary.md",
+      "downstream_consumer": "skill-evidence-validator",
+      "downstream_reference": "05_downstream/final-evidence-only-summary.json",
+      "downstream_effect": "The review summary is consumed by the deterministic final evidence-only summary and validator."
+    }
+  ],
+  "downstream_edges": [
+    {
+      "edge_id": "EDGE-01",
+      "source_use": "USE-01",
+      "consumer_use": "USE-02",
+      "input_envelope": "05_downstream/planting-professional-input.json"
+    },
+    {
+      "edge_id": "EDGE-02",
+      "source_use": "USE-03",
+      "consumer_use": "USE-04",
+      "input_envelope": "05_downstream/stormwater-professional-input.json"
+    },
+    {
+      "edge_id": "EDGE-03",
+      "source_use": "USE-02",
+      "consumer_use": "USE-05",
+      "input_envelope": "05_downstream/cross-discipline-input.json"
+    },
+    {
+      "edge_id": "EDGE-04",
+      "source_use": "USE-04",
+      "consumer_use": "USE-05",
+      "input_envelope": "05_downstream/cross-discipline-input.json"
+    },
+    {
+      "edge_id": "EDGE-05",
+      "source_use": "USE-05",
+      "consumer_use": "USE-06",
+      "input_envelope": "05_downstream/evidence-verification-input.json"
+    },
+    {
+      "edge_id": "EDGE-06",
+      "source_use": "USE-06",
+      "consumer_use": "USE-07",
+      "input_envelope": "05_downstream/review-summary-input.json"
+    },
+    {
+      "edge_id": "EDGE-07",
+      "source_use": "USE-07",
+      "consumer_use": null,
+      "input_envelope": "05_downstream/final-evidence-only-summary.json"
+    }
+  ],
+  "input_scope": "01_input/source"
+}

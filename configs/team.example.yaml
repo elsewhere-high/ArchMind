@@ -1,0 +1,29 @@
+apiVersion: agentteams.io/v1beta1
+kind: Team
+metadata:
+  name: archmind-review-team
+spec:
+  description: 景观施工图多专业预审组；三个专业独立审查，经协调与后置证据核验后提交 Human Gate。
+  peerMentions: true
+  heartbeatEnabled: false
+  heartbeatEvery: 0m
+  workerMembers:
+    - name: review-coordinator
+      role: team_leader
+    - name: hardscape-reviewer
+      role: worker
+    - name: planting-reviewer
+      role: worker
+    - name: stormwater-sponge-reviewer
+      role: worker
+    - name: evidence-verifier
+      role: worker
+---
+apiVersion: agentteams.io/v1beta1
+kind: Human
+metadata:
+  name: chief-engineer
+spec:
+  displayName: 人类总工
+  permissionLevel: 1
+  note: 最终技术处置与签字必须由人类总工作出。

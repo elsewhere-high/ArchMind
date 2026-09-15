@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archmind.local/schemas/skill-evidence-min-001/skill-trace.schema.json",
+  "title": "Minimum Skill Evidence Run Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "trace_schema_version",
+    "trace_id",
+    "use_id",
+    "run_id",
+    "task_id",
+    "agent_id",
+    "skill_name",
+    "skill_version",
+    "implementation_type",
+    "invocation_mode",
+    "native_skill_tool_status",
+    "native_skill_tool_unavailable_reason",
+    "discovered_at",
+    "loaded_at",
+    "invoked_at",
+    "completed_at",
+    "skill_definition_path",
+    "skill_definition_snapshot_reference",
+    "skill_definition_sha256",
+    "input_reference",
+    "input_sha256",
+    "output_reference",
+    "output_sha256",
+    "status",
+    "duration_ms",
+    "failure_reason",
+    "downstream_consumer",
+    "downstream_reference",
+    "downstream_effect",
+    "runtime_session_id",
+    "runtime_tool_name",
+    "runtime_tool_call_id",
+    "runtime_tool_call_id_reason",
+    "runtime_evidence_reference",
+    "runtime_evidence_sha256",
+    "runtime_log_excerpt_reference",
+    "runtime_log_excerpt_sha256",
+    "recorded_at",
+    "recorder_version"
+  ],
+  "properties": {
+    "trace_schema_version": {"const": "1.0.0"},
+    "trace_id": {"type": "string", "pattern": "^TRACE-SEMIN001-0[1-7]$"},
+    "use_id": {"type": "string", "pattern": "^USE-0[1-7]$"},
+    "run_id": {"const": "run-002-skill-evidence-min-001"},
+    "task_id": {"const": "task-20260902-skill-evidence-min-001"},
+    "agent_id": {"enum": ["planting-reviewer", "stormwater-sponge-reviewer", "review-coordinator", "evidence-verifier"]},
+    "skill_name": {"enum": ["extract-review-context", "professional-issue-format", "cross-discipline-conflict-check", "evidence-verification", "review-summary"]},
+    "skill_version": {"const": "1.0.0"},
+    "implementation_type": {"const": "DOCUMENTED_ONLY"},
+    "invocation_mode": {"enum": ["NATIVE_SKILL_TOOL", "DOCUMENTED_ONLY_LOAD_AND_APPLY"]},
+    "native_skill_tool_status": {"enum": ["NATIVE_SKILL_TOOL_USED", "NATIVE_SKILL_TOOL_UNAVAILABLE"]},
+    "native_skill_tool_unavailable_reason": {"type": ["string", "null"]},
+    "discovered_at": {"type": "string", "format": "date-time"},
+    "loaded_at": {"type": "string", "format": "date-time"},
+    "invoked_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": ["string", "null"], "format": "date-time"},
+    "skill_definition_path": {"type": "string", "minLength": 1},
+    "skill_definition_snapshot_reference": {"type": "string", "pattern": "^02_runtime/skill-definitions/"},
+    "skill_definition_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_reference": {"type": "string", "minLength": 1},
+    "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "output_reference": {"type": ["string", "null"]},
+    "output_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["SUCCESS", "FAILED"]},
+    "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+    "failure_reason": {"type": ["string", "null"]},
+    "downstream_consumer": {"type": "string", "minLength": 1},
+    "downstream_reference": {"type": "string", "minLength": 1},
+    "downstream_effect": {"type": "string", "minLength": 1},
+    "runtime_session_id": {"type": "string", "minLength": 1},
+    "runtime_tool_name": {"enum": ["Skill", "read_file"]},
+    "runtime_tool_call_id": {"type": ["string", "null"]},
+    "runtime_tool_call_id_reason": {"type": ["string", "null"]},
+    "runtime_evidence_reference": {"type": "string", "pattern": "^02_runtime/session-fragments/"},
+    "runtime_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "runtime_log_excerpt_reference": {"type": "string", "pattern": "^02_runtime/log-excerpts/"},
+    "runtime_log_excerpt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "recorder_version": {"const": "skill-evidence-recorder-v1"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "SUCCESS"}}},
+      "then": {
+        "properties": {
+          "output_reference": {"type": "string", "minLength": 1},
+          "output_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "completed_at": {"type": "string", "format": "date-time"},
+          "duration_ms": {"type": "integer", "minimum": 0},
+          "failure_reason": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "FAILED"}}},
+      "then": {
+        "properties": {"failure_reason": {"type": "string", "minLength": 1}}
+      }
+    },
+    {
+      "if": {"properties": {"invocation_mode": {"const": "NATIVE_SKILL_TOOL"}}},
+      "then": {
+        "properties": {
+          "native_skill_tool_status": {"const": "NATIVE_SKILL_TOOL_USED"},
+          "native_skill_tool_unavailable_reason": {"type": "null"},
+          "runtime_tool_name": {"const": "Skill"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"invocation_mode": {"const": "DOCUMENTED_ONLY_LOAD_AND_APPLY"}}},
+      "then": {
+        "properties": {
+          "native_skill_tool_status": {"const": "NATIVE_SKILL_TOOL_UNAVAILABLE"},
+          "native_skill_tool_unavailable_reason": {"type": "string", "minLength": 1},
+          "runtime_tool_name": {"const": "read_file"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"runtime_tool_call_id": {"type": "null"}}},
+      "then": {"properties": {"runtime_tool_call_id_reason": {"type": "string", "minLength": 1}}},
+      "else": {"properties": {"runtime_tool_call_id_reason": {"type": "null"}}}
+    }
+  ]
+}

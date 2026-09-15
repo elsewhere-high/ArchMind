@@ -1,0 +1,21 @@
+{
+  "run_id": "run-002-skill-evidence-min-001",
+  "task_id": "task-20260902-skill-evidence-min-001",
+  "discipline": "planting",
+  "scope": "Only the minimum case-001 planting facts needed to demonstrate the declarative Skill chain; no new Human Gate or engineering decision.",
+  "authorized_sources": [
+    {
+      "reference": "01_input/source/project-brief.md",
+      "sha256": "906b145e48299a29d28e9c1998189fe6c4b41a2f44ece52a1306c535661b0ff4"
+    },
+    {
+      "reference": "01_input/source/drawing-facts.json",
+      "sha256": "16b85919ed5476aec3e1eb50b39bb135cef380060c818aec2b4b6ec870919fa1"
+    },
+    {
+      "reference": "01_input/source/issue-schema.json",
+      "sha256": "cced2bb7ff2cf1fc29b9f0161109b9bffec417dceb2de16b78c2850009fda1d5"
+    }
+  ],
+  "maximum_output_issues": 2
+}

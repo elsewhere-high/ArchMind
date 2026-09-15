@@ -1,0 +1,135 @@
+[
+  {
+    "issue_id": "PL-001",
+    "discipline": "planting",
+    "drawing_reference": ["P-01"],
+    "location": "北入口树池",
+    "issue_description": "树池净开口为 1.00m×1.00m，最小边长仅 1.00m，而苗木表给出该大乔木土球直径为 1.20m。土球直径大于树池净开口的最短边长，导致土球无法通过开口正常落位种植；即使对角线方向勉强放入（对角线约 1.41m），种植后根系生长空间也严重受限，影响乔木成活与长期稳定性。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "P-001",
+        "quoted_fact": "树池净开口为 1.00m×1.00m，配置 1 株大乔木，苗木表给出土球直径 1.20m。"
+      }
+    ],
+    "rule_or_reason": "土球直径（1.20m）大于树池净开口最短边长（1.00m），物理上无法按常规方式种植。乔木种植要求树池开口至少不小于土球直径，且宜留有适当余量以容纳根系扩展。需补充适用地方标准对树池最小尺寸的规定。",
+    "risk_level": "high",
+    "related_disciplines": ["hardscape"],
+    "recommendation": "1) 将树池净开口扩大至不小于土球直径（建议 ≥1.50m×1.50m），或2) 更换为土球直径更小的苗木品种，或3) 提供树池扩容详图（如暗扩口、地下扩穴）并说明施工可行性。需园建专业配合调整树池结构尺寸。",
+    "confidence": 0.95,
+    "requires_human_review": true,
+    "status": "verified"
+  },
+  {
+    "issue_id": "PL-002",
+    "discipline": "planting",
+    "drawing_reference": ["P-01"],
+    "location": "北入口树池",
+    "issue_description": "乔木中心距树池东侧雨水篦子中心仅 0.40m，而土球半径为 0.60m（土球直径 1.20m），雨水篦子位于土球平面投影范围内。大乔木根系将向雨水篦子方向扩展，可能导致：1) 根系侵入雨水篦子及连接管道，影响排水功能；2) 未来雨水设施检修或更换时需切断乔木根系，影响乔木健康与安全性。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "P-002",
+        "quoted_fact": "乔木中心距树池东侧雨水篦子中心 0.40m，未提供根系隔离、树池扩容或雨水设施检修避让详图。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-003",
+        "quoted_fact": "雨水篦子位于苗木表所示 1.20m 土球的平面投影范围内，但未提供设施与土球的竖向关系。"
+      }
+    ],
+    "rule_or_reason": "雨水篦子中心距乔木中心 0.40m < 土球半径 0.60m，篦子处于土球投影范围内。大乔木根系在种植后数年将扩展至该区域，缺乏隔离措施将导致根系与雨水设施相互干扰。设计逻辑要求乔木与地下设施之间保持足够间距或设置根系隔离屏障。",
+    "risk_level": "medium",
+    "related_disciplines": ["hardscape", "stormwater_sponge"],
+    "recommendation": "1) 提供根系隔离详图（如垂直阻根板），明确隔离深度与材料；2) 调整雨水篦子位置，使其远离土球投影范围；或3) 提供雨水设施检修避让方案，说明在不损伤乔木根系的前提下如何检修篦子及管道。需园建与雨水海绵专业协同。",
+    "confidence": 0.90,
+    "requires_human_review": true,
+    "status": "verified"
+  },
+  {
+    "issue_id": "PL-003",
+    "discipline": "planting",
+    "drawing_reference": ["P-01"],
+    "location": "北入口树池",
+    "issue_description": "本轮资料未提供根系隔离详图、树池扩容方案或雨水设施检修避让详图。在树池净开口小于土球直径（PL-001）且雨水篦子位于土球投影范围内（PL-002）的情况下，缺少这些关键详图意味着植物种植的可实施性和长期安全性无法得到保障。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "P-002",
+        "quoted_fact": "乔木中心距树池东侧雨水篦子中心 0.40m，未提供根系隔离、树池扩容或雨水设施检修避让详图。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "P-001",
+        "quoted_fact": "树池净开口为 1.00m×1.00m，配置 1 株大乔木，苗木表给出土球直径 1.20m。"
+      }
+    ],
+    "rule_or_reason": "当树池尺寸与土球存在冲突、乔木与雨水设施间距不足时，应提供相应的解决详图。当前资料缺失这些关键节点做法，无法判断设计意图是否可通过其他未提供的详图解决。",
+    "risk_level": "medium",
+    "related_disciplines": ["hardscape", "stormwater_sponge"],
+    "recommendation": "补充以下详图之一或组合：1) 树池扩容详图（含地下扩穴尺寸与做法）；2) 根系隔离详图（含阻根板材料、深度、与篦子距离）；3) 雨水设施检修避让详图。需植物、园建、雨水海绵三专业会签。",
+    "confidence": 0.85,
+    "requires_human_review": true,
+    "status": "verified"
+  },
+  {
+    "issue_id": "PL-004",
+    "discipline": "planting",
+    "drawing_reference": ["P-01"],
+    "location": "北入口（项目整体）",
+    "issue_description": "项目简报未明确项目所在城市，因此无法确认适用的地方标准（如地方绿化技术规程、树池最小尺寸标准、乔木与设施间距要求等）。不同城市对树池尺寸、种植间距、根系保护的要求可能存在差异，缺少城市信息将影响合规性判断。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "G-001",
+        "quoted_fact": "项目具体城市、适用地方标准、完整图纸目录、设计计算书与专业会签记录均未提供。"
+      }
+    ],
+    "rule_or_reason": "植物专业审查需依据项目所在地的地方标准和技术规程。当前输入未提供城市信息，无法确认适用的具体标准编号和条款要求。",
+    "risk_level": "undetermined",
+    "related_disciplines": [],
+    "recommendation": "补充项目所在城市信息，以便确认适用的地方绿化技术规程、树池尺寸标准、乔木与市政设施间距规定等。",
+    "confidence": 0.70,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "项目所在城市名称",
+      "适用的地方绿化技术规程编号",
+      "地方标准对树池最小尺寸的具体要求",
+      "地方标准对乔木与市政设施（雨水篦子等）最小间距的要求"
+    ]
+  },
+  {
+    "issue_id": "PL-005",
+    "discipline": "planting",
+    "drawing_reference": ["P-01", "S-01"],
+    "location": "北入口树池",
+    "issue_description": "S-01 将该树池标注为周边约 180㎡ 铺装的汇水节点。大量汇水进入树池可能导致土壤长期过湿或积水，影响大乔木根系呼吸和成活。当前资料未提供树池调蓄深度、溢流高程、排空时间等关键参数，无法判断汇水量是否超出树池土壤的渗透和蓄存能力，也无法评估对乔木生长的影响。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-001",
+        "quoted_fact": "S-01 将该树池标注为周边约 180㎡ 铺装的汇水节点，设置一处雨水篦子。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-002",
+        "quoted_fact": "本轮资料未给出树池调蓄深度、溢流高程、溢流去向、盲管或排空时间。"
+      }
+    ],
+    "rule_or_reason": "树池作为汇水节点时，需确保汇水量不超过土壤渗透能力和树池蓄存容量，避免乔木根系长期浸泡。设计逻辑要求植物专业确认汇水对乔木生长的影响，但当前缺少关键水力参数。此问题主要由雨水海绵专业负责计算，植物专业需根据其结果判断对乔木的影响。",
+    "risk_level": "undetermined",
+    "related_disciplines": ["stormwater_sponge"],
+    "recommendation": "待雨水海绵专业提供树池调蓄深度、溢流高程、排空时间等参数后，植物专业复核汇水对乔木根系的影响，确认是否需要调整汇水面积、增设溢流通道或更换耐湿性更强的乔木品种。",
+    "confidence": 0.60,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "树池调蓄深度",
+      "溢流高程与溢流去向",
+      "排空时间",
+      "汇水面积 180㎡ 对应的降雨强度与设计重现期",
+      "乔木品种的耐湿性"
+    ]
+  }
+]

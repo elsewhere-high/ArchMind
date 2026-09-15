@@ -1,0 +1,76 @@
+{
+  "case_id": "case-001",
+  "revision": "synthetic-r1",
+  "sources": [
+    {"drawing_id": "L-01", "title": "北入口总平面与铺装索引（文字摘录）", "provided": true},
+    {"drawing_id": "L-02", "title": "北入口竖向与坡向（文字摘录）", "provided": true},
+    {"drawing_id": "P-01", "title": "北入口种植平面与苗木表（文字摘录）", "provided": true},
+    {"drawing_id": "S-01", "title": "海绵与雨水组织（文字摘录）", "provided": true},
+    {"drawing_id": "LD-07", "title": "入口无障碍衔接详图", "provided": false}
+  ],
+  "facts": [
+    {
+      "fact_id": "H-001",
+      "discipline": "hardscape",
+      "drawing_reference": "L-01/L-02",
+      "location": "北入口树池西侧人行铺装",
+      "statement": "铺装完成面点标高由西侧 102.42 降至树池边缘 102.30，图示坡向箭头指向树池。"
+    },
+    {
+      "fact_id": "H-002",
+      "discipline": "hardscape",
+      "drawing_reference": "L-02",
+      "location": "北入口树池东侧人行铺装",
+      "statement": "树池边缘标高 102.30，东侧铺装点标高 102.26；东侧坡向箭头仍指向树池，箭头与点标高表达方向不一致。"
+    },
+    {
+      "fact_id": "H-003",
+      "discipline": "hardscape",
+      "drawing_reference": "L-01",
+      "location": "北入口无障碍通道与树池交界",
+      "statement": "总平标注“无障碍衔接详见 LD-07”，本轮资料未提供 LD-07，且 L-01 未标注该处高差处理。"
+    },
+    {
+      "fact_id": "P-001",
+      "discipline": "planting",
+      "drawing_reference": "P-01",
+      "location": "北入口树池",
+      "statement": "树池净开口为 1.00m×1.00m，配置 1 株大乔木，苗木表给出土球直径 1.20m。"
+    },
+    {
+      "fact_id": "P-002",
+      "discipline": "planting",
+      "drawing_reference": "P-01",
+      "location": "北入口树池",
+      "statement": "乔木中心距树池东侧雨水篦子中心 0.40m，未提供根系隔离、树池扩容或雨水设施检修避让详图。"
+    },
+    {
+      "fact_id": "S-001",
+      "discipline": "stormwater_sponge",
+      "drawing_reference": "S-01",
+      "location": "北入口树池",
+      "statement": "S-01 将该树池标注为周边约 180㎡ 铺装的汇水节点，设置一处雨水篦子。"
+    },
+    {
+      "fact_id": "S-002",
+      "discipline": "stormwater_sponge",
+      "drawing_reference": "S-01",
+      "location": "北入口树池",
+      "statement": "本轮资料未给出树池调蓄深度、溢流高程、溢流去向、盲管或排空时间。"
+    },
+    {
+      "fact_id": "S-003",
+      "discipline": "stormwater_sponge",
+      "drawing_reference": "S-01/P-01",
+      "location": "北入口树池",
+      "statement": "雨水篦子位于苗木表所示 1.20m 土球的平面投影范围内，但未提供设施与土球的竖向关系。"
+    },
+    {
+      "fact_id": "G-001",
+      "discipline": "general",
+      "drawing_reference": "项目资料清单",
+      "location": "全项目",
+      "statement": "项目具体城市、适用地方标准、完整图纸目录、设计计算书与专业会签记录均未提供。"
+    }
+  ]
+}

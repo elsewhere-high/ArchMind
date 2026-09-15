@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/archmind/schemas/professional-issue-v1.json",
+  "title": "ArchMind Professional Review Issue",
+  "type": "object",
+  "required": [
+    "issue_id",
+    "discipline",
+    "drawing_reference",
+    "location",
+    "issue_description",
+    "evidence",
+    "rule_or_reason",
+    "risk_level",
+    "related_disciplines",
+    "recommendation",
+    "confidence",
+    "requires_human_review",
+    "status"
+  ],
+  "properties": {
+    "issue_id": {"type": "string", "minLength": 1},
+    "discipline": {"type": "string", "enum": ["hardscape", "planting", "stormwater_sponge", "cross_discipline"]},
+    "drawing_reference": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "location": {"type": "string", "minLength": 1},
+    "issue_description": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "fact_id", "quoted_fact"],
+        "properties": {
+          "source": {"type": "string"},
+          "fact_id": {"type": "string"},
+          "quoted_fact": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "rule_or_reason": {"type": "string", "minLength": 1},
+    "risk_level": {"type": "string", "enum": ["high", "medium", "low", "undetermined"]},
+    "related_disciplines": {"type": "array", "items": {"type": "string"}},
+    "recommendation": {"type": "string", "minLength": 1},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "requires_human_review": {"type": "boolean"},
+    "status": {"type": "string", "enum": ["open", "verified", "insufficient_evidence", "rejected"]},
+    "missing_information": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "insufficient_evidence"}}},
+      "then": {"required": ["missing_information"], "properties": {"missing_information": {"minItems": 1}}}
+    }
+  ],
+  "additionalProperties": false
+}

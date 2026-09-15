@@ -1,0 +1,95 @@
+[
+  {
+    "issue_id": "SS-001",
+    "discipline": "stormwater_sponge",
+    "drawing_reference": ["S-01"],
+    "location": "北入口树池",
+    "issue_description": "树池被标注为约 180㎡ 铺装的汇水节点并设置一处雨水篦子，但本轮资料未给出树池调蓄深度、溢流高程、溢流去向、盲管管径/坡度/长度或排空时间。无法判断该树池在 180㎡ 汇水面积下的实际调蓄能力、满蓄后溢流路径及排空是否满足要求。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-001",
+        "quoted_fact": "S-01 将该树池标注为周边约 180㎡ 铺装的汇水节点，设置一处雨水篦子。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-002",
+        "quoted_fact": "本轮资料未给出树池调蓄深度、溢流高程、溢流去向、盲管或排空时间。"
+      }
+    ],
+    "rule_or_reason": "作为汇水节点的树池缺少调蓄深度、溢流高程、溢流去向、盲管参数和排空时间等关键水力设计信息，无法验证其在设计降雨条件下的调蓄容量、满蓄后安全溢流路径及排空是否满足设计要求。暴雨期间可能出现溢流影响周边铺装及无障碍通行安全，或排空时间过长导致植物烂根。需补充适用地方海绵城市设计标准（如年径流总量控制率目标、设计降雨量）及相应计算书。",
+    "risk_level": "high",
+    "related_disciplines": ["hardscape", "planting"],
+    "recommendation": "补充树池调蓄深度、溢流口高程及溢流去向（应接入市政雨水系统或明确安全溢流路径）、盲管管径与排空时间；提供汇水面积复核及调蓄容量计算书；与园建、植物专业会签确认竖向关系。",
+    "confidence": 0.9,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "树池调蓄深度（有效蓄水容积）",
+      "溢流口高程及溢流去向（市政雨水管/安全地面溢流路径）",
+      "盲管管径、坡度、长度",
+      "排空时间",
+      "适用地方海绵城市设计标准及年径流总量控制率目标",
+      "汇水面积复核计算书"
+    ]
+  },
+  {
+    "issue_id": "SS-002",
+    "discipline": "stormwater_sponge",
+    "drawing_reference": ["S-01", "P-01"],
+    "location": "北入口树池",
+    "issue_description": "雨水篦子位于苗木表所示 1.20m 土球的平面投影范围内，但未提供雨水篦子与土球的竖向关系。若乔木种植后土球占据雨水篦子所在空间，可能导致雨水篦子无法安装、进水口被堵塞或后期被根系破坏，影响汇水节点功能。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-003",
+        "quoted_fact": "雨水篦子位于苗木表所示 1.20m 土球的平面投影范围内，但未提供设施与土球的竖向关系。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "P-001",
+        "quoted_fact": "树池净开口为 1.00m×1.00m，配置 1 株大乔木，苗木表给出土球直径 1.20m。"
+      }
+    ],
+    "rule_or_reason": "雨水篦子与乔木土球平面投影重叠，且无竖向关系说明。若土球顶面高于或平于雨水篦子底部，将导致进水口无法正常工作；若根系生长侵入篦子下方，后期维护困难且可能破坏设施。该问题同时影响雨水设施有效性和乔木种植可行性，需园建与植物专业协同解决。",
+    "risk_level": "high",
+    "related_disciplines": ["hardscape", "planting"],
+    "recommendation": "补充雨水篦子与土球的竖向剖面关系；明确雨水篦子底标高与土球顶标高的关系；考虑调整雨水篦子位置至土球投影范围外，或设置根系隔离措施并预留检修空间；与植物、园建专业会签。",
+    "confidence": 0.85,
+    "requires_human_review": true,
+    "status": "insufficient_evidence",
+    "missing_information": [
+      "雨水篦子底标高与安装详图",
+      "土球顶面种植标高",
+      "雨水篦子与土球的竖向剖面关系",
+      "是否设置根系隔离措施",
+      "雨水篦子后期检修空间与路径"
+    ]
+  },
+  {
+    "issue_id": "SS-003",
+    "discipline": "stormwater_sponge",
+    "drawing_reference": ["L-02", "S-01"],
+    "location": "北入口树池东侧铺装",
+    "issue_description": "树池东侧铺装：树池边缘标高 102.30，东侧铺装点标高 102.26，但坡向箭头仍指向树池。按点标高，水应从树池流向东侧铺装（下坡方向），与箭头表达的汇水方向相反。若该处坡向表达错误，则东侧铺装实际不向树池汇水，S-01 标注的约 180㎡ 汇水面积可能偏大，树池调蓄容量设计基础不成立。",
+    "evidence": [
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "H-002",
+        "quoted_fact": "树池边缘标高 102.30，东侧铺装点标高 102.26；东侧坡向箭头仍指向树池，箭头与点标高表达方向不一致。"
+      },
+      {
+        "source": "drawing-facts.json",
+        "fact_id": "S-001",
+        "quoted_fact": "S-01 将该树池标注为周边约 180㎡ 铺装的汇水节点，设置一处雨水篦子。"
+      }
+    ],
+    "rule_or_reason": "坡向箭头与点标高矛盾直接影响汇水面积的正确性。若东侧实际为外排方向，则 180㎡ 汇水面积需重新复核，树池调蓄容量可能偏大或偏小，进而影响溢流安全。该问题属于园建与雨水海绵的跨专业接口，需园建先修正或确认竖向设计后，雨水海绵专业重新校核汇水面积。",
+    "risk_level": "medium",
+    "related_disciplines": ["hardscape"],
+    "recommendation": "请园建专业核实东侧坡向箭头与点标高，确认实际汇水方向；若箭头有误应修正 L-02；若点标高有误应修正竖向设计。确认后由雨水海绵专业重新复核汇水面积及树池调蓄容量。",
+    "confidence": 0.8,
+    "requires_human_review": true,
+    "status": "open"
+  }
+]
