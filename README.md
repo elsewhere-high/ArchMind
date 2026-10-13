@@ -55,6 +55,8 @@ make runtime-health
 - [数据契约与工具](docs/contracts.md)
 - [数据与责任边界](docs/security.md)
 - [第三方依赖](THIRD_PARTY_NOTICES.md)
+- [贡献流程](CONTRIBUTING.md)
+- [2026 上海开源软件应用创新大赛参赛材料](submissions/os2026/README.md)
 
 AI 预审不替代法定审查或专业工程师签字。证据不足必须明确标注；未处理的人工确认事项不能由脚本、计时器或 Agent 自动批准。
 

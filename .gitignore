@@ -16,3 +16,5 @@ evaluation/dataset/
 *.log
 *.token
 *.session
+output/
+tmp/
